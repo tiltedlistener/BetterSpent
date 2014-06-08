@@ -1,0 +1,102 @@
+/**
+ * Data: save user stats and app state. 
+ * 
+ * @author ckahler 'corey@ckplusplus.com' 
+ * @version 1.0
+ */
+App.Data = function () {
+
+	// This is a bit redundant, however, I'd like to avoid too much visual nesting
+	this.addSite = function() {
+		var that = this;
+		chrome.storage.local.get("currentSite", function(site) {
+			var host = that.gethost(site["currentSite"]);
+			that.saveSite(host);
+		});		
+	}
+
+	this.removeSite = function() {
+		var that = this;		
+		chrome.storage.local.get("currentSite", function(site) {
+			var host = that.gethost(site["currentSite"]);			
+			that.deleteSite(host);
+		});
+	}	
+
+	this.saveSite = function(site) {
+		chrome.storage.local.get("sites", function(item) {
+			var sites = item["sites"];
+			if (sites == undefined) {
+				sites = {};
+			}
+
+			var siteObj = new App.Site();
+			sites[site] = siteObj;
+			chrome.storage.local.set({"sites" : sites});
+		});
+	}
+
+	this.deleteSite = function(site) {
+		chrome.storage.local.get("sites", function(item) {
+			var sites = item["sites"];
+			delete sites[site]
+			chrome.storage.local.set({"sites" : sites});
+		});		
+	}
+
+	this.getDataAndBuild = function(obj) {
+		var that = this;
+		chrome.storage.local.get("sites", function(sites) {
+			chrome.storage.local.get("tabs", function(tabs) {
+				if (sites !== undefined) {
+					var updatedSites = that.testWhichTabsAreOpen(sites["sites"], tabs["tabs"]);
+					obj.buildListWithData(updatedSites);
+				}
+			});
+		});
+	}
+
+	this.testWhichTabsAreOpen = function (sites, tabs) {
+		for(var tabKey in tabs){
+			for (var siteKey in sites) {
+				var curHost = tabs[tabKey]["host"];
+				if(siteKey == curHost) {
+					var updateTime = this.getUpdatedTime(tabs[tabKey]["accessTime"], sites[siteKey]["totalTime"]),
+						updateTimeToday = this.getUpdatedTime(tabs[tabKey]["accessTime"], sites[siteKey]["timeToday"]);
+					sites[siteKey]["totalTime"] = updateTime;
+					sites[siteKey]["timeToday"] = updateTimeToday;				
+				}
+			}
+		}
+		return sites;
+	};
+
+	this.getUpdatedTime = function(lastAccess, totalTime) {
+		return (Date.now() - lastAccess) + totalTime;
+	};
+	
+	this.testForSiteAlreadySelected = function () {
+		var that = this;
+		chrome.storage.local.get("currentSite", function(currentSite) {
+			if(currentSite !== undefined) {
+				chrome.storage.local.get("sites", function(data) {
+					var sites = data["sites"];
+					if (sites !== undefined) {
+						var host = that.gethost(currentSite["currentSite"]);
+						if (sites[host] !== undefined)
+							App.FormController.switchToDeleteMode();
+					}
+				});
+			}
+		});		
+	}
+
+	this.gethost = function(href) {
+	    var l = document.createElement("a");
+	    l.href = href;
+	  	l = l.hostname.replace('www.', '');
+	  	return l;
+	};
+
+
+}

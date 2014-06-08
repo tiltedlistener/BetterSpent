@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Better Spent</title>
+    <link href="app.css" rel="stylesheet" type="text/css" />
+    <!-- Libraries -->
+    <script src="scripts/libraries/jquery.js"></script>
+
+    <!-- Classes -->
+    <script src="scripts/classes/app.js"></script>
+    <script src="scripts/classes/htmlbuilder.js"></script>    
+    <script src="scripts/classes/data.js"></script>        
+    <script src="scripts/classes/site.js"></script>
+
+    <!-- Controllers -->
+    <script src="scripts/controllers/navcontroller.js"></script>
+    <script src="scripts/controllers/formcontroller.js"></script>
+    <script src="scripts/controllers/listcontroller.js"></script>
+
+    <!-- Start App -->
+    <script src="scripts/bootstrap.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <!-- Nav -->
+      <div id="navbar">
+        <h2 id="logo">BetterSpent</h2>
+      </div>
+
+      <!-- Save New Data -->
+      <div id="save-delete-form">
+          <div class="inner-slide active" id="add-site">
+            <input type="submit" value="Add" class="save-site-submit" />
+          </div>
+          <div class="inner-slide" id="delete-site">
+            <input type="submit" value="Remove" class="delete-site-submit" />
+          </div>
+      </div>
+
+      <!-- Listed States -->
+      <div id="stats">
+        <h3 id="stats-header"><span meta-slide="current">Current</span> / <span class="active" meta-slide="historical">Historical</span> </h3>
+        <div id="current" class="inner-slide">
+          <div class="inner">
+
+          </div>
+        </div>
+        <div id="historical" class="inner-slide active">
+          <div class="inner">
+            
+          </div>          
+        </div>
+      </div>
+
+      <!-- End main wrapper -->
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,133 @@
+/** Semantic Elements **/
+html, body {
+  border:0;
+  margin:0;
+  padding:0;
+
+  font-size:100%;
+  font-family: Helvetica, sans-serif;
+  font-weight:100;
+}
+
+body {
+  width: 480px;
+}
+
+h1, h2, h3 {
+  font-weight:100;
+  margin:0;
+}
+
+ul {
+  padding:0px;
+}
+
+ul li {
+  list-style: none;
+}
+
+/** Navbar **/
+#navbar {
+  clear:both;
+  height:40px;
+}
+
+#logo {
+  float:left;
+}
+
+.nav-group {
+  -webkit-padding-start:0px;
+  float:right;
+  margin:9px 0px 0px;
+}
+
+.nav-button {
+  cursor:pointer;
+  float:left;
+  margin-left:20px;
+}
+
+.nav-button.active {
+  font-weight:500;
+}
+
+/** Form Styles **/
+input[type="submit"] {
+  border:none;
+  background:none;
+}
+
+/** Page Section Elements **/
+#wrapper {
+  background-color:#CACACC;
+  padding:20px;
+}
+
+.slide {
+  display:none;
+}
+
+.slide.active {
+  display:block;
+}
+
+.inner-slide {
+  display:none;
+}
+.inner-slide.active {
+  display:block;
+}
+
+/** Save Form **/
+#save-delete-form {
+  float:right;
+}
+
+input.delete-site-submit,
+input.save-site-submit {
+  background-color:#777;
+  color:white;
+  cursor:pointer;
+  font-family: Helvetica, sans-serif;
+  font-size:16px;
+  font-weight:100;
+  margin:0;
+  padding: 4px 20px;
+  text-transform: uppercase;
+}
+
+.save-site-input {
+  border: none;
+  font-size:16px;
+  height: 16px;
+  padding: 5px 8px;
+}
+
+/** Stats **/
+
+#stats-header {
+  cursor:pointer;
+}
+
+#stats-header .active {
+  cursor:text;
+  font-weight:bold;
+}
+
+.status-list {
+  margin-top:15px;
+}
+
+.status-item {
+  clear:both;
+  height:30px;
+}
+
+.status-site {
+  float:left;
+}
+
+.status-time {
+  float:right;
+}

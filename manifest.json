@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Better Spent",
+  "description": "Keeps track of your sites each day, historically, and socially. Let's you know what you could be doing.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": ["scripts/background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}
