@@ -56,7 +56,7 @@ App.HTMLBuilder = function () {
 		var list = this.buildList();
 		this.historicalSection.html(list);
 		
-		this.setState(TODAY);
+		this.setState(HISTORICAL);
 		var todayList = this.buildList();
 		this.todaySection.html(todayList);
 	}		
