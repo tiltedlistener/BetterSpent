@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
  	var data = new App.Data();
  	data.testForSiteAlreadySelected();
 
+ 	// Update current date
+ 	data.setCurrentDate();
+
  	// Display
 	App.ListController.buildLists();
 });

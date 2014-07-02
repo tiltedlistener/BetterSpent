@@ -6,6 +6,41 @@
  */
 App.Data = function () {
 
+	this.setCurrentDate = function() {
+		var d = new Date(),
+			dayNum = d.getDate();
+
+		var that = this;
+		chrome.storage.local.get("currentDate", function(item) {
+			var date = item["currentDate"];
+
+			if (!(date == undefined)) {
+				if (date !== dayNum) {
+					that.wipeOldDates();
+				} 
+			}
+			chrome.storage.local.set({"currentDate" : dayNum});
+		});		
+
+	}
+
+	// Clears the current date counts
+	this.wipeOldDates = function () {
+		chrome.storage.local.get("sites", function(item) {
+			var sites = item["sites"];
+			if (sites == undefined) {
+				sites = {};
+			}
+
+			// Reset all times to zero
+			for (var i=0,len=sites.length;i<len;i++) {
+				sites.timeToday = 0;
+			}
+			
+			chrome.storage.local.set({"sites" : sites});
+		});
+	}
+
 	// This is a bit redundant, however, I'd like to avoid too much visual nesting
 	this.addSite = function() {
 		var that = this;
