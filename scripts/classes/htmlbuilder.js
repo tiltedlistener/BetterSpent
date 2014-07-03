@@ -52,11 +52,12 @@ App.HTMLBuilder = function () {
 	 * @param  {object} data raw data from the database
 	 */
 	this.buildListWithData = function(data) {
+		this.setState(HISTORICAL);
 		this.setData(data);
 		var list = this.buildList();
 		this.historicalSection.html(list);
 		
-		this.setState(HISTORICAL);
+		this.setState(TODAY);
 		var todayList = this.buildList();
 		this.todaySection.html(todayList);
 	}		

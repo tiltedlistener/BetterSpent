@@ -5,6 +5,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 	if(changeInfo.status == 'complete') {
 		getAllTabs();
 	}
+	setCurrentDate();
+
 	// Save current site regardless
 	chrome.storage.local.set({"currentSite": tab.url});
 });
@@ -93,13 +95,11 @@ var whichTabsAreNewAndUpdated = function(current, old, currentCount) {
 
 		// Concerns what's present currently
 		if (old[currentTab["id"]] == undefined) {
-			console.log("NEW TAB");
 			// Create new tab reference
 			currentTab["accessTime"] = Date.now();
 			newTabSet[currentTab["id"]] = currentTab;
 		} else {
 			if (old[currentTab["id"]]["url"] != currentTab["url"]) {
-				console.log("CHANGING TAB LOCATION!");
 				// Remove tab and then reset to new tab information
 				sendForProcessing.push(old[currentTab["id"]]);
 				currentTab["accessTime"] = Date.now();
@@ -114,8 +114,6 @@ var whichTabsAreNewAndUpdated = function(current, old, currentCount) {
 };
 
 var processTabs = function(tabs) {
-	console.log("PROCESSING");
-	console.log(tabs);
 	chrome.storage.local.get("sites", function(data) {
 		var sites = data["sites"];
 		if (sites !== undefined) {
@@ -124,11 +122,45 @@ var processTabs = function(tabs) {
 					startTime = tabs[i]["accessTime"],
 					additionalTime = endTime - startTime;
 
-				console.log("TIME ADDED: "+ additionalTime);
 				sites[tabs[i]["host"]]["totalTime"] += additionalTime;
+				sites[tabs[i]["host"]]["timeToday"] += additionalTime;
 			}
 			chrome.storage.local.set({"sites": sites});			
 		}
+	});
+};
+
+var setCurrentDate = function() {
+	var d = new Date(),
+		dayNum = d.getDate();
+
+	var that = this;
+	chrome.storage.local.get("currentDate", function(item) {
+		var date = item["currentDate"];
+
+		if (!(date == undefined)) {
+			if (date !== dayNum) {
+				wipeOldDates();
+			} 
+		}
+		chrome.storage.local.set({"currentDate" : dayNum});
+	});		
+};
+
+// Clears the current date counts
+var wipeOldDates = function () {
+	chrome.storage.local.get("sites", function(item) {
+		var sites = item["sites"];
+		if (sites == undefined) {
+			sites = {};
+		}
+
+		// Reset all times to zero
+		for (var i=0,len=sites.length;i<len;i++) {
+			sites.timeToday = 0;
+		}
+		
+		chrome.storage.local.set({"sites" : sites});
 	});
 };
 
