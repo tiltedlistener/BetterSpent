@@ -14,7 +14,7 @@ App.Data = function () {
 		chrome.storage.local.get("currentDate", function(item) {
 			var date = item["currentDate"];
 
-			if (!(date == undefined)) {
+			if (date !== undefined) {
 				if (date !== dayNum) {
 					that.wipeOldDates();
 				} 
@@ -33,8 +33,8 @@ App.Data = function () {
 			}
 
 			// Reset all times to zero
-			for (var i=0,len=sites.length;i<len;i++) {
-				sites.timeToday = 0;
+			for (var key in sites) {
+				sites[key].timeToday = 0;
 			}
 			
 			chrome.storage.local.set({"sites" : sites});
