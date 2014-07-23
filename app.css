@@ -60,7 +60,7 @@ input[type="submit"] {
 
 /** Page Section Elements **/
 #wrapper {
-  background-color:#CACACC;
+  background-color:white;
   padding:20px;
 }
 
@@ -105,14 +105,26 @@ input.save-site-submit {
 }
 
 /** Stats **/
-
 #stats-header {
-  cursor:pointer;
+  margin-bottom:50px;
 }
 
-#stats-header .active {
-  cursor:text;
-  font-weight:bold;
+#header-list {
+  float:left;
+}
+
+.header-icon {
+  cursor: pointer;
+  border-radius:5px;
+  float:left;
+  margin-right:5px;
+  padding:5px 8px;
+  text-align: center;
+  width:45px;
+}
+
+.header-icon.active {
+  background:#ededed;
 }
 
 .status-list {

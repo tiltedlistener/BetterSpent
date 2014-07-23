@@ -18,7 +18,7 @@ App.NavController = (function () {
     navButtons = $(".nav-button");
     slides = $(".slide");
     statsSlides = $('#stats .inner-slide');
-    statsHeaderOptions = $('#stats-header span');
+    statsHeaderOptions = $('.header-icon');
 
     applyClickToNavButtons();
   }
@@ -49,7 +49,7 @@ App.NavController = (function () {
   function statOptionClicked(event) {
     var clicked = $(event.target);
     if (!clicked.hasClass('active')) {
-      $('#stats-header span.active').removeClass('active');
+      $('.header-icon.active').removeClass('active');
       $('#stats .inner-slide.active').removeClass('active');
 
       var slideChoice = clicked.attr('meta-slide');

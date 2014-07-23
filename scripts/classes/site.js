@@ -7,4 +7,6 @@
 App.Site = function () {
 	this.totalTime = 0;
 	this.timeToday = 0;
+	this.timesVisited = 0;
+	this.timesVisitedToday = 0;
 }
