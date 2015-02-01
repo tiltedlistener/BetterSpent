@@ -25,37 +25,57 @@
 
       <!-- Nav -->
       <div id="navbar">
-        <h2 id="logo">BetterSpent</h2>
+        <div class="settings-page-button nav-button">
+          <img src="assets/home.png" />
+        </div>
       </div>
 
-      <!-- Save New Data -->
-      <div id="save-delete-form">
-          <div class="inner-slide active" id="add-site">
-            <input type="submit" value="Add" class="save-site-submit" />
+      <!-- Settings Page -->
+      <div class="page settings">
+
+      </div>
+
+      <!-- Form Page -->
+      <div class="page form">
+        <!-- Save New Data -->
+        <div id="save-delete-form">
+            <div class="inner-slide active" id="add-site">
+              <input type="submit" value="Add" class="save-site-submit" />
+            </div>
+            <div class="inner-slide" id="delete-site">
+              <input type="submit" value="Remove" class="delete-site-submit" />
+            </div>
+        </div>
+
+        <!-- Select Buttons -->
+        <div id="stats-header">
+          <div class="header-icon active" meta-slide="current">Today</div> 
+          <div class="header-icon" meta-slide="historical">Total</div>
+        </div>
+
+        <!-- Listed States -->
+        <div id="stats">
+          <div id="current" class="inner-slide active">
+            <div class="inner">
+
+            </div>
           </div>
-          <div class="inner-slide" id="delete-site">
-            <input type="submit" value="Remove" class="delete-site-submit" />
-          </div>
-      </div>
-
-      <!-- Select Buttons -->
-      <div id="stats-header">
-        <div class="header-icon active" meta-slide="current">Today</div> 
-        <div class="header-icon" meta-slide="historical">Total</div>
-      </div>
-
-      <!-- Listed States -->
-      <div id="stats">
-        <div id="current" class="inner-slide active">
-          <div class="inner">
-
+          <div id="historical" class="inner-slide">
+            <div class="inner">
+              
+            </div>          
           </div>
         </div>
-        <div id="historical" class="inner-slide">
-          <div class="inner">
-            
-          </div>          
-        </div>
+      </div>
+
+      <!-- Stats Page -->
+      <div class="page stats">
+
+      </div>
+
+      <!-- User Info Page -->
+      <div class="page user-info">
+
       </div>
 
       <!-- End main wrapper -->

@@ -28,8 +28,10 @@ ul li {
 
 /** Navbar **/
 #navbar {
+  border-bottom:1px solid #b0b0b0;
   clear:both;
   height:40px;
+  margin-bottom:20px;
 }
 
 #logo {
@@ -45,12 +47,14 @@ ul li {
 .nav-button {
   cursor:pointer;
   float:left;
-  margin-left:20px;
 }
 
 .nav-button.active {
   font-weight:500;
 }
+
+/* Specific Nav Buttons */
+
 
 /** Form Styles **/
 input[type="submit"] {
