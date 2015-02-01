@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Better Spent",
-  "description": "Keeps track of your sites each day, historically, and socially. Let's you know what you could be doing.",
+  "description": "Keeps track of your browsing time on marked websites daily, historically, and socially.",
   "version": "1.0",
 
   "browser_action": {
