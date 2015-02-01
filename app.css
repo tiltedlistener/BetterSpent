@@ -5,7 +5,7 @@ html, body {
   padding:0;
 
   font-size:100%;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight:100;
 }
 
@@ -55,6 +55,40 @@ ul li {
 
 /* Specific Nav Buttons */
 
+/** Pages **/
+.pages-wrapper {
+  position:relative;
+}
+
+.page {
+  background:white;
+  display:none;
+  position:absolute;
+  width:100%;
+}
+
+.page.active {
+  display:block;
+}
+
+/** PAGE: Contents **/
+.contents-item {
+  background-image:url('assets/arrow.png');
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  cursor:pointer;
+  font-size:18px;
+  margin:10px 0px;
+  padding:10px 0px;
+
+  transition: padding-left 250ms;
+}
+
+.contents-item:hover {
+  background-color:#b0b0b0;
+  color:white;
+  padding-left:20px;
+}
 
 /** Form Styles **/
 input[type="submit"] {
@@ -66,6 +100,7 @@ input[type="submit"] {
 #wrapper {
   background-color:white;
   padding:20px;
+  position:relative;
 }
 
 .slide {

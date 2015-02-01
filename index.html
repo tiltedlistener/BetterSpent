@@ -2,7 +2,10 @@
 <html>
   <head>
     <title>Better Spent</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href="app.css" rel="stylesheet" type="text/css" />
+    
     <!-- Libraries -->
     <script src="scripts/libraries/jquery.js"></script>
 
@@ -30,55 +33,64 @@
         </div>
       </div>
 
-      <!-- Settings Page -->
-      <div class="page settings">
+      <!-- Start Pages -->
+      <div class="pages-wrapper">
 
-      </div>
-
-      <!-- Form Page -->
-      <div class="page form">
-        <!-- Save New Data -->
-        <div id="save-delete-form">
-            <div class="inner-slide active" id="add-site">
-              <input type="submit" value="Add" class="save-site-submit" />
-            </div>
-            <div class="inner-slide" id="delete-site">
-              <input type="submit" value="Remove" class="delete-site-submit" />
-            </div>
-        </div>
-
-        <!-- Select Buttons -->
-        <div id="stats-header">
-          <div class="header-icon active" meta-slide="current">Today</div> 
-          <div class="header-icon" meta-slide="historical">Total</div>
-        </div>
-
-        <!-- Listed States -->
-        <div id="stats">
-          <div id="current" class="inner-slide active">
-            <div class="inner">
-
-            </div>
-          </div>
-          <div id="historical" class="inner-slide">
-            <div class="inner">
-              
-            </div>          
+        <!-- Contents Page -->
+        <div class="page contents active">
+          <div class="contents-list">
+            <div class="contents-item">Sites and Times</div>
+            <div class="contents-item">Statistics</div>
+            <div class="contents-item">User Settings</div>
           </div>
         </div>
+
+        <!-- Form Page -->
+        <div class="page form">
+          <!-- Save New Data -->
+          <div id="save-delete-form">
+              <div class="inner-slide active" id="add-site">
+                <input type="submit" value="Add" class="save-site-submit" />
+              </div>
+              <div class="inner-slide" id="delete-site">
+                <input type="submit" value="Remove" class="delete-site-submit" />
+              </div>
+          </div>
+
+          <!-- Select Buttons -->
+          <div id="stats-header">
+            <div class="header-icon active" meta-slide="current">Today</div> 
+            <div class="header-icon" meta-slide="historical">Total</div>
+          </div>
+
+          <!-- Listed States -->
+          <div id="stats">
+            <div id="current" class="inner-slide active">
+              <div class="inner">
+
+              </div>
+            </div>
+            <div id="historical" class="inner-slide">
+              <div class="inner">
+                
+              </div>          
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Page -->
+        <div class="page stats">
+
+        </div>
+
+        <!-- User Info Page -->
+        <div class="page user-info">
+
+        </div>
+
+      <!-- End Pages Wrapper -->
       </div>
-
-      <!-- Stats Page -->
-      <div class="page stats">
-
-      </div>
-
-      <!-- User Info Page -->
-      <div class="page user-info">
-
-      </div>
-
-      <!-- End main wrapper -->
+    <!-- End main wrapper -->
     </div>
   </body>
 </html>
