@@ -31,7 +31,6 @@ ul li {
   border-bottom:1px solid #b0b0b0;
   clear:both;
   height:40px;
-  margin-bottom:20px;
 }
 
 #logo {
@@ -51,6 +50,17 @@ ul li {
 
 .nav-button.active {
   font-weight:500;
+}
+
+.contents-page-button {
+    padding: 5px;
+    background: white;
+
+    transition: background 250ms;
+}
+
+.contents-page-button:hover {
+  background:rgba(131, 91, 91, 0.05);
 }
 
 /* Specific Nav Buttons */
@@ -75,19 +85,17 @@ ul li {
 .contents-item {
   background-image:url('assets/arrow.png');
   background-repeat: no-repeat;
-  background-position: 100% 50%;
+  background-position: 99% 50%;
   cursor:pointer;
   font-size:18px;
-  margin:10px 0px;
   padding:10px 0px;
 
-  transition: padding-left 250ms;
+  background-color:white;
+  transition: background-color 250ms;
 }
 
 .contents-item:hover {
-  background-color:#b0b0b0;
-  color:white;
-  padding-left:20px;
+   background-color:rgba(131, 91, 91, 0.05);
 }
 
 /** Form Styles **/
@@ -99,7 +107,7 @@ input[type="submit"] {
 /** Page Section Elements **/
 #wrapper {
   background-color:white;
-  padding:20px;
+  padding:10px 20px;
   position:relative;
 }
 

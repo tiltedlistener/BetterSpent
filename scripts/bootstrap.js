@@ -7,7 +7,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 	// Gets all objects and sets behaviors
- 	App.NavController.init(); 		
+ 	App.ContentsController.init();	
  	App.FormController.init();	 
  	App.ListController.init();
 

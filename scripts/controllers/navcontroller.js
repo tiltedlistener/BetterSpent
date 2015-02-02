@@ -4,6 +4,8 @@
  * @author ckahler 'corey@ckplusplus.com' 
  * @version 1.0
  */
+
+// @DEPRECATED
 App.NavController = (function () {
 
   var slides,                         // Main slides
