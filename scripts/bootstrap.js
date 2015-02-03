@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
  	App.ContentsController.init();	
  	App.FormController.init();	 
  	App.ListController.init();
+ 	App.UserSettingsController.init();
 
  	// TODO put in form controller
  	// Update form display

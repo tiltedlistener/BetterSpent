@@ -8,6 +8,7 @@
     
     <!-- Libraries -->
     <script src="scripts/libraries/jquery.js"></script>
+    <script src="scripts/libraries/support.js"></script>    
 
     <!-- Classes -->
     <script src="scripts/classes/app.js"></script>
@@ -19,6 +20,7 @@
     <script src="scripts/controllers/contentscontroller.js"></script>
     <script src="scripts/controllers/formcontroller.js"></script>
     <script src="scripts/controllers/listcontroller.js"></script>
+    <script src="scripts/controllers/usersettingscontroller.js"></script>
 
     <!-- Start App -->
     <script src="scripts/bootstrap.js"></script>
@@ -40,6 +42,7 @@
         <div class="page contents active">
           <div class="contents-list">
             <div class="contents-item" meta-page="form">Sites and Times</div>
+            <div class="contents-item" meta-page="better-spent">Better Spent Notions</div>
             <div class="contents-item" meta-page="stats">Statistics</div>
             <div class="contents-item" meta-page="user-settings">User Settings</div>
           </div>
@@ -89,6 +92,7 @@
           <div class="page-inner-content">
             <div class="page-form">
               
+              <div class="error"></div>
               <div class="form-input-group">
                 <div class="form-label">Email</div>
                 <div class="form-input"><input type="text" name="user-email" /></div>
@@ -97,16 +101,29 @@
               <div class="form-input-group">
                 <div class="form-label">Send alerts:</div>
                 <div class="form-input">
-                  Via email <input type="radio" name="alert[email]" />
+                  Via email <input type="radio" name="alerttype" value="email" checked />
                 </div>
                 <div class="form-input">
-                  Via Chrome <input type="radio" name="alert[desktop]" />
+                  Via Chrome <input type="radio" name="alerttype" value="chrome"/>
                 </div>
               </div>
 
               <div class="form-input-group">
                 <button id="submit-user-info">Submit</button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Better Spent -->
+        <div class="page better-spent">
+          <div class="page-header">Better Spent Notions</div>
+          <div class="page-inner-content">
+            <div class="tutorial">
+              <div class="tutorial-explain">
+                Enter reminders of what you could better spend your time doing in time increments. As your time accrues on the sites your visit, you'll be reminded of by your past self of what you could better spend your time doing. 
+              </div>
+              <div class="tutorial-dismiss">Dismiss</div>
             </div>
           </div>
         </div>
