@@ -237,7 +237,7 @@ input.save-site-submit {
 .better-spent-main-group {
   clear:both;
   display:none;
-  min-height:220px;
+  min-height:250px;
   overflow:hidden;
   padding-top:20px;
   position: relative;
@@ -245,16 +245,17 @@ input.save-site-submit {
 
 .better-spent-form {
   background:white;
+  border:1px solid #b0b0b0;
   left:100%;
-  padding-top:20px;
+  padding:20px;
   position:absolute;
-  top:0px;
+  top:20px;
   width:100%;
 }
 
 .better-spent-text {
   height: 60px;
-  width: 98%;
+  width: 92%;
 }
 
 .abort-better-spent-add {
@@ -277,9 +278,36 @@ input.save-site-submit {
 .better-spent-list-item {
   border-bottom:1px solid #ececec;
   padding:10px 0px;
+
+  transition: margin-left 500ms;
 }
 
+.better-spent-list-item.deleting {
+  margin-left:-440px;
+}
 
+.better-spent-list-item-delete {
+  float:right;
+  margin-right:-65px;
 
+  transition: margin-right 500ms;
+}
 
+.better-spent-list-item:hover .better-spent-list-item-delete {
+  margin-right:0px;
+}
 
+.better-spent-list-item.deleting:hover .better-spent-list-item-delete {
+  margin-right:-65px;
+}
+
+.button.better-spent-list-item-delete {
+  background:red;
+  color:white;
+  margin-top:0px;
+}
+
+.better-spent-list-item-time {
+  color:#b0b0b0;
+  font-weight:bold;
+}

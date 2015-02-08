@@ -7,4 +7,5 @@
 App.SpentListItem = function () {
 	this.text = '';
 	this.timeValue = 0;
+	this.index = -1;
 }

@@ -4,6 +4,10 @@
  * @author ckahler 'corey@ckplusplus.com' 
  * @version 1.0
  */
+
+/**
+* Note: "spents" is the data lingo for Better Spent entries
+*/
 App.BetterSpentsController = (function () {
 
   // Settings booleans
@@ -28,7 +32,9 @@ App.BetterSpentsController = (function () {
   var textValue = null;
   var timeValue = null;
 
+
   function init() {
+    // Initialize Variables
     tutorialDismissBtn = $('.tutorial-dismiss');
     tutorialDisplay = $('.tutorial');
     betterSpentMainGroup = $('.better-spent-main-group');
@@ -42,8 +48,12 @@ App.BetterSpentsController = (function () {
     betterSpentTextInput = $('.better-spent-text');
     betterSpentTimeInput = $('input[name="timeinterval"]');
 
+    // Setup display
     checkIfTutorialShouldDisplay();
+    initializeBetterSpent();
+    displayBetterSpentEntries();
 
+    // Set behaviors
     applyClickHandlers();
   }
 
@@ -77,7 +87,6 @@ App.BetterSpentsController = (function () {
 
   function addBetterSpentItem() {
     textValue = betterSpentTextInput.val().trim();
-    console.log(textValue);
     timeValue = betterSpentTimeInput.where(":checked").val();
 
     if (validateForm()) {
@@ -107,13 +116,6 @@ App.BetterSpentsController = (function () {
     betterSpentFormError.fadeOut('fast');    
   }
 
-  function saveBetterSpentEntry() {
-
-    
-    
-    hideBetterSpentForm();
-  }
-
   function resetForm() {
     textValue = null;
     timeValue = null;
@@ -121,6 +123,142 @@ App.BetterSpentsController = (function () {
     betterSpentTextInput.val('');
     betterSpentTimeInput.where(":checked").attr("checked", false);
     betterSpentTimeInput.eq(0).prop("checked", true);
+  }
+
+  function saveBetterSpentEntry() {
+    chrome.storage.local.get("spents", function(item) {
+      var spents = item["spents"];
+      if (spents == undefined) {
+        spents = {}
+      } 
+
+      var newItem = new App.SpentListItem();
+      var newId = Object.keys(spents).length;
+
+      newItem.index = newId;
+      newItem.text = textValue;
+      newItem.timeValue = timeValue;
+      spents[newId] = newItem;
+
+      chrome.storage.local.set({"spents" : spents}, function () {
+        displayBetterSpentEntries();
+        hideBetterSpentForm();
+      });    
+    });
+  }
+
+  /**
+  * Display Better Spent entries 
+  */
+  function displayBetterSpentEntries() {
+    chrome.storage.local.get("spents", function(item) {
+      var spents = item["spents"];
+      if (spents !== undefined) {
+        var indices = Object.keys(spents);
+
+        if (indices.length > 0) {
+
+          var html = '';
+          for (var i = 0, len = indices.length; i < len; i++) {
+            html += generateHtmlForSpentItem(spents[indices[i]]);
+          }
+          betterSpentList.html(html);
+          applyDeleteBehavior();
+        } else {
+          betterSpentList.html("None added yet :)");
+        }
+      }   
+    });
+  }
+
+  function generateHtmlForSpentItem(data) {
+    var html = '<div class="better-spent-list-item">';
+    html += '<div class="better-spent-list-item-delete button" meta-item="'+ data.index +'">Delete</div>';
+    html += '<div class="better-spent-list-item-name">' + data.text + '</div>';
+    html += '<div class="better-spent-list-item-time">Every ' + translateTimeValue(data.timeValue) + '</div>';
+    html += '</div>';
+    return html;
+  }
+
+  function translateTimeValue(time) {
+    if (time == '10') return '10 min';
+    if (time == '30') return '30 min';
+    if (time == '60') return '1 hour';
+  }
+
+  function applyDeleteBehavior() {
+    $('.better-spent-list-item-delete').bind('click', deleteSpentEntryPushed);
+  }
+
+  function removeDeleteBehavior() {
+    $('.better-spent-list-item-delete').unbind('click');
+  }
+
+  function deleteSpentEntryPushed(event) {
+    var target = $(event.target);
+    var index = target.attr('meta-item');
+    var targetParent = target.closest(".better-spent-list-item");
+
+    targetParent.addClass('deleting');
+    setTimeout(function() {
+      targetParent.slideUp('fast', function() {
+        targetParent.remove();
+        deleteBetterSpentEntry(index);
+      });
+    }, 500);
+  }
+
+  function deleteBetterSpentEntry(index) {
+    chrome.storage.local.get("spents", function(item) {
+      var spents = item["spents"];
+      if (spents !== undefined) {
+        delete spents[index];
+
+        var newSpents = {};
+        var indices = Object.keys(spents);
+
+        for (var i=0, len = indices.length; i < len; i++) {
+          var currentObj = spents[indices[i]];
+          currentObj.index = i;
+          newSpents[i] = currentObj;
+        }
+
+        chrome.storage.local.set({"spents" : newSpents}, function () {
+          displayBetterSpentEntries();
+        });   
+      }   
+    });
+  }
+
+  /**
+  * Initialize the Better Spent entries
+  */
+  function initializeBetterSpent() {
+    chrome.storage.local.get("spents", function(item) {
+      var spents = item["spents"];
+      if (spents === undefined) {
+
+        var spents = initialSpents();
+
+        chrome.storage.local.set({"spents" : spents}, function () {
+          displayBetterSpentEntries();
+        });   
+      }   
+    });
+  }
+
+  function initialSpents() {
+    var tempSpents = {};
+
+    var spentItem = new App.SpentListItem();
+    spentItem.index = 0;
+    spentItem.timeValue = '10';
+    spentItem.text = "Read 8 pages in a novel";
+    tempSpents[0] = spentItem;
+
+
+
+    return tempSpents;
   }
 
   return { 
