@@ -41,6 +41,15 @@ textarea:focus {
   width:100%;
 }
 
+.error {
+  color:red;
+  display:none;
+}
+
+.form-input-group {
+  margin-bottom:10px;
+}
+
 /** Shared Styles **/
 .button {
   background:#ededed;
@@ -222,9 +231,12 @@ input.save-site-submit {
 }
 
 /** User Settings **/
-.error {
-  color:red;
-  display:none;
+.page-form {
+  padding-top:20px;
+}
+
+input[name="user-email"] {
+  width:50%;
 }
 
 

@@ -17,7 +17,7 @@ App.ContentsController = (function () {
   var pages;
 
   // State Vars
-  var currentPage = 'contents';
+  var currentPage = 'user-settings';
 
   function init() {
     homeButton = $('.contents-page-button');

@@ -11,7 +11,7 @@
 App.BetterSpentsController = (function () {
 
   // Settings booleans
-  var tutorialDismissed = true;
+  var tutorialDismissed = false;
 
   // Controls
   var tutorialDismissBtn;
@@ -58,7 +58,15 @@ App.BetterSpentsController = (function () {
   }
 
   function checkIfTutorialShouldDisplay() {
-    if (tutorialDismissed) dismissTutorial();
+    chrome.storage.local.get("settings", function(item) {
+      var settings = item["settings"];
+      if (settings !== undefined) {
+        if (settings["dismissedValue"] !== undefined) {
+          setDismissedValue(settings["dismissedValue"]);
+          if (tutorialDismissed) dismissTutorial();
+        }
+      }
+    });
   }
 
   function applyClickHandlers() {
@@ -72,6 +80,7 @@ App.BetterSpentsController = (function () {
     tutorialDisplay.fadeOut(500, function() {
       betterSpentMainGroup.fadeIn();
       tutorialDismissed = true;
+      saveDismissedValue();
     });
   }
 
@@ -271,8 +280,32 @@ App.BetterSpentsController = (function () {
     return tempSpents;
   }
 
+  /**
+  * Support Methods
+  */
+  function getDismissedValue() {
+    return tutorialDismissed;
+  }
+
+  function setDismissedValue(val) {
+    tutorialDismissed = val;
+  }
+
+  function saveDismissedValue() {
+    chrome.storage.local.get("settings", function(item) {
+      var settings = item["settings"];
+      if (settings == undefined) {
+        settings = {};
+      }
+
+      settings["dismissedValue"] = getDismissedValue();
+      chrome.storage.local.set({"settings" : settings});
+    });
+  }
+
   return { 
-    init: init
+    init: init,
+    getDismissedValue: getDismissedValue
   };
 
 })();

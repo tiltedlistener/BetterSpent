@@ -23,11 +23,10 @@ App.UserSettingsController = (function () {
   function init() {
     userEmail = $('input[name="user-email"]');
     userAlertType = $('input[name="alerttype"]');
-  
-    submitButton = $('#submit-user-info');
-
+    submitButton = $('.submit-user-info');
     errorDisplay = $('.error');
 
+    prepareSettingsDisplay();
     applyClickHandlers();
   }
 
@@ -40,6 +39,8 @@ App.UserSettingsController = (function () {
     var currentAlert = userAlertType.where(":checked").val()
 
     if (validateEmail(currentEmail)) {
+      email = currentEmail;
+      alertType = currentAlert;
       saveUserSettings();
     } else {
       displayError("Please enter a valid email address");
@@ -61,12 +62,40 @@ App.UserSettingsController = (function () {
   } 
 
   function saveUserSettings() {
+    chrome.storage.local.get("settings", function(item) {
+      var settings = item["settings"];
+      if (settings == undefined) {
+        settings = {};
+      }
 
+      settings["email"] = email;
+      settings["alertType"] = alertType;
+      settings["dismissedValue"] = App.BetterSpentsController.getDismissedValue();
+
+      chrome.storage.local.set({"settings" : settings});
+    });
   }
 
+  function prepareSettingsDisplay() {
+    chrome.storage.local.get("settings", function(item) {
+      var settings = item["settings"];
+      if (settings !== undefined) {
+
+        email = settings["email"];
+        alertType = settings["alertType"];
+
+        userEmail.val(email);
+        userAlertType.each(function() {
+          if ($(this).val() == alertType) {
+            $(this).prop('checked', true);
+          }
+        });
+      }
+    });
+  }
 
   return { 
-    init: init
+    init: init,
   };
 
 })();
