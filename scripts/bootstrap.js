@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
  	App.FormController.init();	 
  	App.ListController.init();
  	App.UserSettingsController.init();
+ 	App.BetterSpentsController.init();
 
  	// TODO put in form controller
  	// Update form display

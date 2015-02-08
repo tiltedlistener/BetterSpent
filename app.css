@@ -26,6 +26,31 @@ ul li {
   list-style: none;
 }
 
+textarea {
+  resize:none;
+}
+
+textarea:focus {
+  outline:none;
+  outline-width:0;
+}
+
+/** Support **/
+.clearing-div {
+  clear:both;
+  width:100%;
+}
+
+/** Shared Styles **/
+.button {
+  background:#ededed;
+  cursor: pointer;
+  float:left;
+  margin-top:20px;
+  padding:5px 8px;
+  text-align: center;
+}
+
 /** Navbar **/
 #navbar {
   border-bottom:1px solid #b0b0b0;
@@ -74,6 +99,7 @@ ul li {
 .page {
   background:white;
   display:none;
+  padding-bottom:20px;
   position:absolute;
   width:100%;
 }
@@ -167,7 +193,6 @@ input.save-site-submit {
 
 .header-icon {
   cursor: pointer;
-  border-radius:5px;
   float:left;
   margin-right:5px;
   padding:5px 8px;
@@ -206,4 +231,55 @@ input.save-site-submit {
 /** Better Spent Page **/
 .tutorial {
   margin-top:5px;
+  padding-top:20px;
 }
+
+.better-spent-main-group {
+  clear:both;
+  display:none;
+  min-height:220px;
+  overflow:hidden;
+  padding-top:20px;
+  position: relative;
+}
+
+.better-spent-form {
+  background:white;
+  left:100%;
+  padding-top:20px;
+  position:absolute;
+  top:0px;
+  width:100%;
+}
+
+.better-spent-text {
+  height: 60px;
+  width: 98%;
+}
+
+.abort-better-spent-add {
+  margin-left:10px;
+}
+
+.better-spent-error {
+  background:rgba(255,255,255,0.8);
+  color:red;
+  display:none;
+  height:100%;
+  padding-top:24%;
+  position:absolute;
+  text-align: center;
+  width:100%;
+}
+
+/* Better Spent List */
+.better-spent-list-item-empty,
+.better-spent-list-item {
+  border-bottom:1px solid #ececec;
+  padding:10px 0px;
+}
+
+
+
+
+

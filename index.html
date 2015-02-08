@@ -15,12 +15,14 @@
     <script src="scripts/classes/htmlbuilder.js"></script>    
     <script src="scripts/classes/data.js"></script>        
     <script src="scripts/classes/site.js"></script>
+    <script src="scripts/classes/spentlistitem.js"></script>
 
     <!-- Controllers -->
     <script src="scripts/controllers/contentscontroller.js"></script>
     <script src="scripts/controllers/formcontroller.js"></script>
     <script src="scripts/controllers/listcontroller.js"></script>
     <script src="scripts/controllers/usersettingscontroller.js"></script>
+    <script src="scripts/controllers/betterspentscontroller.js"></script>
 
     <!-- Start App -->
     <script src="scripts/bootstrap.js"></script>
@@ -83,7 +85,10 @@
 
         <!-- Stats Page -->
         <div class="page stats">
+          <div class="page-header">Statistics</div>
+          <div class="page-inner-content">
 
+          </div>
         </div>
 
         <!-- User Info Page -->
@@ -101,10 +106,10 @@
               <div class="form-input-group">
                 <div class="form-label">Send alerts:</div>
                 <div class="form-input">
-                  Via email <input type="radio" name="alerttype" value="email" checked />
+                  <input type="radio" name="alerttype" value="email" checked /> Via email 
                 </div>
                 <div class="form-input">
-                  Via Chrome <input type="radio" name="alerttype" value="chrome"/>
+                  <input type="radio" name="alerttype" value="chrome"/> Via Chrome 
                 </div>
               </div>
 
@@ -119,15 +124,53 @@
         <div class="page better-spent">
           <div class="page-header">Better Spent Notions</div>
           <div class="page-inner-content">
+            
+            <!-- Tutorial Display -->
             <div class="tutorial">
               <div class="tutorial-explain">
                 Enter reminders of what you could better spend your time doing in time increments. As your time accrues on the sites your visit, you'll be reminded of by your past self of what you could better spend your time doing. 
               </div>
-              <div class="tutorial-dismiss">Dismiss</div>
+              <div class="tutorial-dismiss button">Dismiss</div>
             </div>
+
+            <div class="better-spent-main-group">
+
+              <!-- Better Spent List -->
+              <div class="better-spent-list">
+                <div class="better-spent-list-inner">
+                  <div class="better-spent-list-item-empty">None added yet :)</div>
+                </div>
+                <div class="better-spent-list-footer">
+                  <div class="start-better-spent-addition button">Add...</div>
+                </div>
+              </div> 
+
+              <!-- Better Spent Form -->
+              <div class="better-spent-form">
+                <div class="better-spent-error"></div>
+                <div class="form-input">
+                  <textarea class="better-spent-text" placeholder="Add a Reminder..."></textarea>
+                </div>
+                <div class="form-input-group">
+                  <div class="form-label">Interval</div>
+                  <div class="form-input">
+                    <input type="radio" name="timeinterval" value="10" checked /> 10 min 
+                  </div>
+                  <div class="form-input">
+                    <input type="radio" name="timeinterval" value="30"/> 30 min 
+                  </div>
+                  <div class="form-input">
+                    <input type="radio" name="timeinterval" value="60"/> 1 hour 
+                  </div>
+                </div>
+                <div class="add-better-spent button">Add</div>
+                <div class="abort-better-spent-add button">Cancel</div>
+              </div>
+
+            </div> <!-- End main group -->
+
           </div>
         </div>
-
 
       <!-- End Pages Wrapper -->
       </div>
