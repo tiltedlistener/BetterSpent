@@ -254,9 +254,19 @@ App.BetterSpentsController = (function () {
     spentItem.index = 0;
     spentItem.timeValue = '10';
     spentItem.text = "Read 8 pages in a novel";
-    tempSpents[0] = spentItem;
+    tempSpents[spentItem.index] = spentItem;
 
+    spentItem = new App.SpentListItem();
+    spentItem.index = 1;
+    spentItem.timeValue = '30';
+    spentItem.text = "Study a foreign language";
+    tempSpents[spentItem.index] = spentItem;   
 
+    spentItem = new App.SpentListItem();
+    spentItem.index = 2;
+    spentItem.timeValue = '60';
+    spentItem.text = "Cook a meal at home";
+    tempSpents[spentItem.index] = spentItem;   
 
     return tempSpents;
   }
