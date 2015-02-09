@@ -35,6 +35,10 @@ textarea:focus {
   outline-width:0;
 }
 
+input[type="submit"]:focus {
+  outline:none;
+}
+
 /** Support **/
 .clearing-div {
   clear:both;

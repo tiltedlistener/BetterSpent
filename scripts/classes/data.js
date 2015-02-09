@@ -6,14 +6,17 @@
  */
 App.Data = function () {
 
+	/**
+	*	Sets the current date to see if we need to wipe the 
+	*	"today" times and send those times to historical times.
+	*/
 	this.setCurrentDate = function() {
-		var d = new Date(),
-			dayNum = d.getDate();
+		var d = new Date();
+		var dayNum = d.getDate();
 
 		var that = this;
 		chrome.storage.local.get("currentDate", function(item) {
 			var date = item["currentDate"];
-
 			if (date !== undefined) {
 				if (date !== dayNum) {
 					that.wipeOldDates();
@@ -21,7 +24,6 @@ App.Data = function () {
 			}
 			chrome.storage.local.set({"currentDate" : dayNum});
 		});		
-
 	}
 
 	// Clears the current date counts
@@ -32,7 +34,6 @@ App.Data = function () {
 				sites = {};
 			}
 
-			// Reset all times to zero
 			for (var key in sites) {
 				sites[key].timeToday = 0;
 			}
@@ -79,18 +80,25 @@ App.Data = function () {
 		});		
 	}
 
-	this.getDataAndBuild = function(obj) {
+	/**
+	*	Properly build out our html display
+	*/
+	this.getDataAndBuild = function(htmlBuilder) {
 		var that = this;
 		chrome.storage.local.get("sites", function(sites) {
 			chrome.storage.local.get("tabs", function(tabs) {
 				if (sites !== undefined) {
 					var updatedSites = that.testWhichTabsAreOpen(sites["sites"], tabs["tabs"]);
-					obj.buildListWithData(updatedSites);
+					htmlBuilder.buildListWithData(updatedSites);
 				}
 			});
 		});
 	}
 
+	/**
+	*	This allows us to see the updated time as we open and close the extension
+	* 	for sites that are curently open. Meaning, time updates as we go. 
+	*/
 	this.testWhichTabsAreOpen = function (sites, tabs) {
 		for(var tabKey in tabs){
 			for (var siteKey in sites) {
@@ -110,6 +118,9 @@ App.Data = function () {
 		return (Date.now() - lastAccess) + totalTime;
 	};
 	
+	/**
+	*	Test if we should show the remove button on a site that is already in our list. 
+	*/
 	this.testForSiteAlreadySelected = function () {
 		var that = this;
 		chrome.storage.local.get("currentSite", function(currentSite) {
@@ -119,7 +130,7 @@ App.Data = function () {
 					if (sites !== undefined) {
 						var host = that.gethost(currentSite["currentSite"]);
 						if (sites[host] !== undefined)
-							App.FormController.switchToDeleteMode();
+							App.TimesController.switchToDeleteMode();
 					}
 				});
 			}

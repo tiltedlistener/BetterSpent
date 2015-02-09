@@ -10,7 +10,7 @@ App.HTMLBuilder = function () {
 		TODAY = 1;
 
 	this.state = TODAY;
-	this.data = [];						// Keeps track of the data from the db
+	this.data = [];						// Keeps track of the data from storage
 	this.historicalSection = null;		// Keeps track of historical location
 	this.todaySection = null;			// Keeps track of today location
 

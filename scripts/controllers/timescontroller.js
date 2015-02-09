@@ -39,17 +39,20 @@ App.TimesController = (function () {
     dataService = new App.Data();
     htmlBuilder = new App.HTMLBuilder();
 
-    initHtmlBuild();
     applySubmitHandlers();
+
+    initHtmlBuilder();
+    initData();
   }
 
-  function initHtmlBuild() {
+  function initHtmlBuilder() {
     htmlBuilder.setHistoricalSection(historicalSection);
     htmlBuilder.setTodaySection(todaySection);
+  }
 
+  function initData() {
     dataService.testForSiteAlreadySelected();
     dataService.setCurrentDate();
-
     dataService.getDataAndBuild(htmlBuilder);
   }
 
@@ -57,13 +60,13 @@ App.TimesController = (function () {
     $('.save-site-submit').click(function(event) {
         dataService.addSite();
         switchToDeleteMode();
-        setTimeout(function () { App.ListController.buildLists(); }, 500);
+        setTimeout(function () { App.ListController.buildLists(); }, 250);
     });
 
     $('.delete-site-submit').click(function(event){
         dataService.removeSite();
         switchToAddMode();
-        setTimeout(function () { App.ListController.buildLists(); }, 500);
+        setTimeout(function () { App.ListController.buildLists(); }, 250);
     });
 
     timesHeaderBtns.click(changeTimeDisplay);

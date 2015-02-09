@@ -1,5 +1,5 @@
 /**
- * EVENT LISTENERS
+ * Chrome Event Listeners
  */
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 	if(changeInfo.status == 'complete') {
@@ -21,6 +21,9 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 	removeTabs(tabId);
 });
 
+/**
+* 	Action Methods
+*/
 var removeTabs = function (tabId) {
 	chrome.storage.local.get("tabs", function(data){
 		var tabs = data["tabs"];
