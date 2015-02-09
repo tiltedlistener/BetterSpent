@@ -1,41 +1,56 @@
 /**
- * FormController
+ * TimesController
  * 
  * @author ckahler 'corey@ckplusplus.com' 
  * @version 1.0
  */
-App.FormController = (function () {
+App.TimesController = (function () {
 
   // Form Components
-  var form;
   var deleteForm;
   var addForm;
   
   // Navigation components
-  var slides;                         // Main slides
-  var navButtons;                     // Buttons to control transition
-  var statsSlides;
-  var statsHeaderOptions;
+  var slides;                         
+  var timesSlides;
+  var timesHeaderBtns;
+
+  // Slide components
+  var todaySection;
+  var historicalSection;
 
   // Service tools
   var dataService;
+  var htmlBuilder;
 
   /**
    * Get view object references and apply handlers
    */
   function init() {
-    form = $('#form');
     deleteForm = $('#delete-site');
     addForm = $('#add-site');
-    navButtons = $(".nav-button");
     slides = $(".slide");
-    statsSlides = $('#stats .inner-slide');
-    statsHeaderOptions = $('.header-icon');
+    timesSlides = $('#times .inner-slide');
+    timesHeaderBtns = $('.header-icon');
+
+    todaySection = $('#current .inner');
+    historicalSection = $('#historical .inner');
 
     dataService = new App.Data();
+    htmlBuilder = new App.HTMLBuilder();
 
+    initHtmlBuild();
     applySubmitHandlers();
-    applyClickToNavButtons();
+  }
+
+  function initHtmlBuild() {
+    htmlBuilder.setHistoricalSection(historicalSection);
+    htmlBuilder.setTodaySection(todaySection);
+
+    dataService.testForSiteAlreadySelected();
+    dataService.setCurrentDate();
+
+    dataService.getDataAndBuild(htmlBuilder);
   }
 
   function applySubmitHandlers() {
@@ -50,11 +65,8 @@ App.FormController = (function () {
         switchToAddMode();
         setTimeout(function () { App.ListController.buildLists(); }, 500);
     });
-  }
 
-  function applyClickToNavButtons() {
-    navButtons.click(navButtonClicked);
-    statsHeaderOptions.click(statOptionClicked);
+    timesHeaderBtns.click(changeTimeDisplay);
   }
 
   function switchToDeleteMode() {
@@ -67,22 +79,11 @@ App.FormController = (function () {
     addForm.addClass('active');
   }
 
-  function navButtonClicked(event) {
-    var clicked = $(event.target);
-    if (!clicked.hasClass('active')) {
-      $('.nav-button.active').removeClass('active');
-      $('.slide.active').removeClass('active');
-      var slideName = clicked.attr("meta-slide");
-      $('#' + slideName).addClass('active');
-      clicked.addClass('active');
-    }
-  }
-
-  function statOptionClicked(event) {
+  function changeTimeDisplay(event) {
     var clicked = $(event.target);
     if (!clicked.hasClass('active')) {
       $('.header-icon.active').removeClass('active');
-      $('#stats .inner-slide.active').removeClass('active');
+      $('#times .inner-slide.active').removeClass('active');
 
       var slideChoice = clicked.attr('meta-slide');
       $('#' + slideChoice).addClass('active');
