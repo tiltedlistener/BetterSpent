@@ -12,6 +12,7 @@ App.UserSettingsController = (function () {
 
   // Buttons
   var submitButton;
+  var submitNotice;
 
   // User Values
   var email,
@@ -25,6 +26,7 @@ App.UserSettingsController = (function () {
     userAlertType = $('input[name="alerttype"]');
     submitButton = $('.submit-user-info');
     errorDisplay = $('.error');
+    submitNotice = $('.submitted-notice');
 
     prepareSettingsDisplay();
     applyClickHandlers();
@@ -41,6 +43,7 @@ App.UserSettingsController = (function () {
     if (validateEmail(currentEmail)) {
       email = currentEmail;
       alertType = currentAlert;
+      displayUpdatingStatus();
       saveUserSettings();
     } else {
       displayError("Please enter a valid email address");
@@ -54,6 +57,16 @@ App.UserSettingsController = (function () {
     setTimeout(function() {
       errorDisplay.slideUp();
     }, 2000);
+  }
+
+  function displayUpdatingStatus() {
+    submitButton.addClass("submitting");
+    submitNotice.fadeIn();
+  }
+
+  function removeUpdatingStatus() {
+    submitButton.removeClass("submitting");
+    submitNotice.fadeOut();
   }
 
   function validateEmail(email) { 
@@ -71,6 +84,8 @@ App.UserSettingsController = (function () {
       settings["email"] = email;
       settings["alertType"] = alertType;
       settings["dismissedValue"] = App.BetterSpentsController.getDismissedValue();
+
+      removeUpdatingStatus();
 
       chrome.storage.local.set({"settings" : settings});
     });

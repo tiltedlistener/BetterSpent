@@ -239,6 +239,18 @@ input[name="user-email"] {
   width:50%;
 }
 
+.submit-user-info.submitting {
+  opacity:0.5;
+}
+
+.submitted-notice {
+  color:#fb6a13;
+  display:none;
+  float: left;
+  margin-top: 26px;
+  margin-left: 20px;
+}
+
 
 /** Better Spent Page **/
 .tutorial {

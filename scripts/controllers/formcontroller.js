@@ -6,10 +6,13 @@
  */
 App.FormController = (function () {
 
-  var form,
-      deleteForm,
-      addForm,
-      dataService;
+  // Form Components
+  var form;
+  var deleteForm;
+  var addForm;
+  
+  // Service tools
+  var dataService;
 
   /**
    * Get view object references and apply handlers
