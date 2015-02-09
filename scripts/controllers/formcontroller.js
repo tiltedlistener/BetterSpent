@@ -11,6 +11,12 @@ App.FormController = (function () {
   var deleteForm;
   var addForm;
   
+  // Navigation components
+  var slides;                         // Main slides
+  var navButtons;                     // Buttons to control transition
+  var statsSlides;
+  var statsHeaderOptions;
+
   // Service tools
   var dataService;
 
@@ -21,9 +27,15 @@ App.FormController = (function () {
     form = $('#form');
     deleteForm = $('#delete-site');
     addForm = $('#add-site');
+    navButtons = $(".nav-button");
+    slides = $(".slide");
+    statsSlides = $('#stats .inner-slide');
+    statsHeaderOptions = $('.header-icon');
+
     dataService = new App.Data();
 
     applySubmitHandlers();
+    applyClickToNavButtons();
   }
 
   function applySubmitHandlers() {
@@ -40,6 +52,11 @@ App.FormController = (function () {
     });
   }
 
+  function applyClickToNavButtons() {
+    navButtons.click(navButtonClicked);
+    statsHeaderOptions.click(statOptionClicked);
+  }
+
   function switchToDeleteMode() {
     deleteForm.addClass('active');
     addForm.removeClass('active');
@@ -48,6 +65,29 @@ App.FormController = (function () {
   function switchToAddMode() {
     deleteForm.removeClass('active');
     addForm.addClass('active');
+  }
+
+  function navButtonClicked(event) {
+    var clicked = $(event.target);
+    if (!clicked.hasClass('active')) {
+      $('.nav-button.active').removeClass('active');
+      $('.slide.active').removeClass('active');
+      var slideName = clicked.attr("meta-slide");
+      $('#' + slideName).addClass('active');
+      clicked.addClass('active');
+    }
+  }
+
+  function statOptionClicked(event) {
+    var clicked = $(event.target);
+    if (!clicked.hasClass('active')) {
+      $('.header-icon.active').removeClass('active');
+      $('#stats .inner-slide.active').removeClass('active');
+
+      var slideChoice = clicked.attr('meta-slide');
+      $('#' + slideChoice).addClass('active');
+      clicked.addClass('active');
+    }
   }
 
   return { 
