@@ -102,10 +102,15 @@ App.TimesController = (function () {
     return sites;
   }
 
+  function clearSitesData() {
+    dataService.clearSitesData();
+  }
+
   return { 
     init: init,
     switchToDeleteMode: switchToDeleteMode, 
-    getCurrentData: getCurrentData
+    getCurrentData: getCurrentData,
+    clearSitesData: clearSitesData
   };
 
 })();

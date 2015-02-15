@@ -152,4 +152,9 @@ App.Data = function () {
 	};
 
 
+	/** Update methods **/
+	this.clearSitesData = function() {
+		chrome.storage.local.set("sites", {});
+	};
+
 }
