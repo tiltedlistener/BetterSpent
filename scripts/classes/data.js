@@ -6,6 +6,8 @@
  */
 App.Data = function () {
 
+	this._cachedOpenSites = null;
+
 	/**
 	*	Sets the current date to see if we need to wipe the 
 	*	"today" times and send those times to historical times.
@@ -111,11 +113,16 @@ App.Data = function () {
 				}
 			}
 		}
+		this._cachedOpenSites = sites;
 		return sites;
 	};
 
 	this.getUpdatedTime = function(lastAccess, totalTime) {
 		return (Date.now() - lastAccess) + totalTime;
+	};
+
+	this.getOpenTabs = function() {	
+		return this._cachedOpenSites;
 	};
 	
 	/**

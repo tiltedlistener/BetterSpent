@@ -339,3 +339,18 @@ input[name="user-email"] {
   color:#b0b0b0;
   font-weight:bold;
 }
+
+/** Statistics **/
+.results-item {
+  border-bottom: 1px solid #ececec;
+  padding: 10px 0px;
+}
+
+.results-label {
+  margin-bottom:5px;
+}
+
+.results-times {
+  color: #b0b0b0;
+  font-weight: bold;
+}

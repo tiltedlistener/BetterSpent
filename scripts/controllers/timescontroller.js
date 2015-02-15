@@ -94,9 +94,18 @@ App.TimesController = (function () {
     }
   }
 
+  /**
+  * Module support methods
+  */
+  function getCurrentData() {
+    var sites = dataService.getOpenTabs();
+    return sites;
+  }
+
   return { 
     init: init,
-    switchToDeleteMode: switchToDeleteMode
+    switchToDeleteMode: switchToDeleteMode, 
+    getCurrentData: getCurrentData
   };
 
 })();

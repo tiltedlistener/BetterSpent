@@ -95,7 +95,6 @@ var whichTabsAreNewAndUpdated = function(current, old, currentCount) {
 
 	for(var i=0;i<currentCount;i++) {
 		var currentTab = current[i];
-
 		// Concerns what's present currently
 		if (old[currentTab["id"]] == undefined) {
 			// Create new tab reference
