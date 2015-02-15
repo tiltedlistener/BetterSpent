@@ -54,6 +54,7 @@ input[type="submit"]:focus {
   margin-bottom:15px;
 }
 
+.hidden,
 .hidden-option {
   display:none;
 }
