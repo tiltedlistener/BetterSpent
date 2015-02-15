@@ -106,11 +106,16 @@ App.TimesController = (function () {
     dataService.clearSitesData();
   }
 
+  function formatTime(time) {
+    return htmlBuilder.formatTime(time);
+  }
+
   return { 
     init: init,
     switchToDeleteMode: switchToDeleteMode, 
     getCurrentData: getCurrentData,
-    clearSitesData: clearSitesData
+    clearSitesData: clearSitesData,
+    formatTime: formatTime
   };
 
 })();
