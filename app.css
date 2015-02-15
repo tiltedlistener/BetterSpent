@@ -51,7 +51,11 @@ input[type="submit"]:focus {
 }
 
 .form-input-group {
-  margin-bottom:10px;
+  margin-bottom:15px;
+}
+
+.hidden-option {
+  display:none;
 }
 
 /** Shared Styles **/
@@ -255,6 +259,9 @@ input[name="user-email"] {
   margin-left: 20px;
 }
 
+.form-time-options-group {
+  margin-top:10px;
+}
 
 /** Better Spent Page **/
 .tutorial {

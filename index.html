@@ -23,6 +23,7 @@
     <script src="scripts/controllers/usersettingscontroller.js"></script>
     <script src="scripts/controllers/betterspentscontroller.js"></script>
     <script src="scripts/controllers/statscontroller.js"></script>
+    <script src="scripts/controllers/notificationscontroller.js"></script>
 
     <!-- Start App -->
     <script src="scripts/bootstrap.js"></script>
@@ -106,12 +107,36 @@
               </div>
             
               <div class="form-input-group">
-                <div class="form-label">Send alerts:</div>
+                <div class="form-label">Send notifications</div>
                 <div class="form-input">
-                  <input type="radio" name="alerttype" value="email" checked /> Via email 
+                  <input type="radio" name="alerttype" value="yes" checked /> Yes
                 </div>
                 <div class="form-input">
-                  <input type="radio" name="alerttype" value="chrome"/> Via Chrome 
+                  <input type="radio" name="alerttype" value="no"/> No
+                </div>
+
+                <div class="form-input hidden-option form-time-options-group">
+                  <div class="form-label">What time?</div>
+                  <div class="form-input">
+                    <select class="hour-option">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                    </select>
+                    <select class="time-of-day-option">
+                      <option value="am">AM</option>
+                      <option value="pm">PM</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -119,7 +144,9 @@
                 <div class="submit-user-info button">Update</div>
                 <div class="submitted-notice">Submitted</div>
               </div>
-              
+
+              <div id="create-notification" class="button">Notify</div>
+
             </div>
           </div>
         </div>

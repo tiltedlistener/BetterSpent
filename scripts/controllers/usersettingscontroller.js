@@ -7,16 +7,21 @@
 App.UserSettingsController = (function () {
 
   // Form Items
-  var userEmail,
-      userAlertType;
+  var userEmail;
+  var userAlertType;
+  var timeOfDayOption;
+  var hourOfDayOption;
+  var formTimeOptionsGroup;
 
   // Buttons
   var submitButton;
   var submitNotice;
 
   // User Values
-  var email,
-      alertType;
+  var email;
+  var alertType;
+  var hourOption;
+  var timeOption;
 
   // Error Support
   var errorDisplay;
@@ -27,6 +32,9 @@ App.UserSettingsController = (function () {
     submitButton = $('.submit-user-info');
     errorDisplay = $('.error');
     submitNotice = $('.submitted-notice');
+    timeOfDayOption = $('.time-of-day-option');
+    hourOfDayOption = $('.hour-option');
+    formTimeOptionsGroup = $('.form-time-options-group');
 
     prepareSettingsDisplay();
     applyClickHandlers();
@@ -34,15 +42,23 @@ App.UserSettingsController = (function () {
 
   function applyClickHandlers() {
     submitButton.click(submitUserInfo);
+    userAlertType.click(updateAlertState);
+  }
+
+  function updateAlertState(event) {
+    var currentAlert = userAlertType.where(":checked").val();
+    showOrHideHoursOptions(currentAlert);
   }
 
   function submitUserInfo() {
     var currentEmail = userEmail.val();
-    var currentAlert = userAlertType.where(":checked").val()
+    var currentAlert = userAlertType.where(":checked").val();
 
     if (validateEmail(currentEmail)) {
       email = currentEmail;
       alertType = currentAlert;
+      hourOption = hourOfDayOption.val();
+      timeOption = timeOfDayOption.val();
       displayUpdatingStatus();
       saveUserSettings();
     } else {
@@ -84,10 +100,20 @@ App.UserSettingsController = (function () {
       settings["email"] = email;
       settings["alertType"] = alertType;
       settings["dismissedValue"] = App.BetterSpentsController.getDismissedValue();
+      settings["timeOption"] = timeOption;
+      settings["hourOption"] = hourOption;
 
       removeUpdatingStatus();
 
       chrome.storage.local.set({"settings" : settings});
+
+      App.NotificationsController.setNotificationTime(hourOption, timeOption);
+
+      if(alertType == 'yes') {
+        App.NotificationsController.setNotificationStatus(true); 
+      } else {
+        App.NotificationsController.setNotificationStatus(false);
+      }
     });
   }
 
@@ -105,8 +131,20 @@ App.UserSettingsController = (function () {
             $(this).prop('checked', true);
           }
         });
+        
+        showOrHideHoursOptions(alertType);
+        timeOfDayOption.val(settings["timeOption"]);
+        hourOfDayOption.val(settings["hourOption"]);
       }
     });
+  }
+
+  function showOrHideHoursOptions(alertType) {
+    if(alertType == 'yes') {
+      formTimeOptionsGroup.show();
+    } else {
+      formTimeOptionsGroup.hide();
+    }
   }
 
   return { 

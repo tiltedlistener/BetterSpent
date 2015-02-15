@@ -10,4 +10,5 @@ document.addEventListener('DOMContentLoaded', function () {
  	App.UserSettingsController.init();
  	App.BetterSpentsController.init();
  	App.StatsController.init();
+ 	App.NotificationsController.init();
 });
