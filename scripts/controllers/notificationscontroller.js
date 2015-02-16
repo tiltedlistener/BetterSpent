@@ -17,7 +17,7 @@ App.NotificationsController = (function () {
     if (ampm == "pm") {
       finalHour += 12;
     }
-    notificationTime = finalHour + hour; 
+    notificationTime = finalHour + Number(hour);
   }
 
   function setNotificationStatus(status) {
@@ -39,6 +39,7 @@ App.NotificationsController = (function () {
     var diffMinutesToNextHour = 0;
     var diffHourToNextAlarm = 0;
     var finalMillToNextTime = 0;
+
     if (notificationTime - currentHours > 1) {
       diffMinutesToNextHour = 60 - currentMinutes;
       diffHourToNextAlarm = notificationTime - (currentHours + 1);
@@ -51,7 +52,7 @@ App.NotificationsController = (function () {
 
     chrome.alarms.onAlarm.addListener(fireNotification);
     chrome.alarms.create("notify", {
-      "when" : finalMillToNextTime,
+      "when" : Date.now() + finalMillToNextTime,
       "periodInMinutes" : 1440,
     });
   }
