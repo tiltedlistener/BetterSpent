@@ -60,13 +60,13 @@ App.TimesController = (function () {
     $('.save-site-submit').click(function(event) {
         dataService.addSite();
         switchToDeleteMode();
-        setTimeout(function () { App.ListController.buildLists(); }, 250);
+        setTimeout(function () { buildLists(); }, 250);
     });
 
     $('.delete-site-submit').click(function(event){
         dataService.removeSite();
         switchToAddMode();
-        setTimeout(function () { App.ListController.buildLists(); }, 250);
+        setTimeout(function () { buildLists(); }, 250);
     });
 
     timesHeaderBtns.click(changeTimeDisplay);
@@ -80,6 +80,10 @@ App.TimesController = (function () {
   function switchToAddMode() {
     deleteForm.removeClass('active');
     addForm.addClass('active');
+  }
+
+  function buildLists() {
+    dataService.getDataAndBuild(htmlBuilder);
   }
 
   function changeTimeDisplay(event) {
