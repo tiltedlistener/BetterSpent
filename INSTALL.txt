@@ -1,0 +1,10 @@
+INSTALL.txt
+
+How to install this unpackaged extension:
+
+1. Place the folder somewhere on your system where it won't get in your way. 
+2. Open Chrome and go to: chrome://extensions/
+3. At the top of the page there is a button on the upper left that reads: "Load Unpackaged Extensions...". Click it and a file picker will come down.
+4. Navigate to where you placed the folder earlier and select the folder itself and click "Select"
+
+The BetterSpent extension should appear in the list of the extensions below and the orange icon shold appear in your top bar to the right. 
