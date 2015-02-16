@@ -18,8 +18,8 @@ App.UserSettingsController = (function () {
   var submitNotice;
 
   // User Values
-  var email;
-  var alertType;
+  var email = "false@emaile.com";
+  var alertType = "yes";
   var hourOption;
   var timeOption;
 
@@ -130,12 +130,22 @@ App.UserSettingsController = (function () {
           if ($(this).val() == alertType) {
             $(this).prop('checked', true);
           }
-        });
-        
-        showOrHideHoursOptions(alertType);
+        }); 
         timeOfDayOption.val(settings["timeOption"]);
         hourOfDayOption.val(settings["hourOption"]);
+      } else {
+        var d = new Date();
+        var hours = d.getHours();
+
+        if (hours > 12) {
+          hours -= 12;
+          timeOfDayOption.val("pm");
+        } else {
+          timeOfDayOption.val("am");
+        }
+        hourOfDayOption.val(hours);
       }
+      showOrHideHoursOptions(alertType);
     });
   }
 
