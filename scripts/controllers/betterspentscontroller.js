@@ -85,11 +85,13 @@ App.BetterSpentsController = (function () {
   }
 
   function showBetterSpentForm() {
+    betterSpentMainGroup.animate({"min-height": "250px"}, 500);
     betterSpentForm.animate({left : '0'}, 500);
   }
 
   function hideBetterSpentForm() {
     betterSpentForm.animate({left : '100%'}, 500, function () {
+      betterSpentMainGroup.animate({"min-height": "0px"}, 500);
       resetForm();
     });
   }

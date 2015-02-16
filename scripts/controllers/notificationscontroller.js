@@ -76,6 +76,7 @@ App.NotificationsController = (function () {
     var sites = App.TimesController.getCurrentData();
     for (var site in sites) {
       var currentSite = sites[site];
+      console.log(currentSite);
       var formattedTime = App.TimesController.formatTime(currentSite.totalTime);
       options["items"].push({title: currentSite.host, message: formattedTime});
     }

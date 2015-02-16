@@ -264,6 +264,10 @@ input[name="user-email"] {
   margin-top:10px;
 }
 
+.user-settings .button {
+  margin-top:0px;
+}
+
 /** Better Spent Page **/
 .tutorial {
   margin-top:5px;
@@ -273,7 +277,6 @@ input[name="user-email"] {
 .better-spent-main-group {
   clear:both;
   display:none;
-  min-height:250px;
   overflow:hidden;
   padding-top:20px;
   position: relative;
